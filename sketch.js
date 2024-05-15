@@ -8,7 +8,6 @@
 
 */
 
-import { _controls } from "./libraries/quicksettings"
 
 
 // *** Basic ***
@@ -409,7 +408,7 @@ import { _controls } from "./libraries/quicksettings"
 		} */
 
 		//Key controls
-		let angle = 0 
+		/*let angle = 0 
 		let x = 0
 		let y = 0
 		let z = 0
@@ -431,12 +430,13 @@ import { _controls } from "./libraries/quicksettings"
 			  push()
 			    fill(0,255,255)
 				stroke(175)
-			    rotateX(angle)
+			    rotateX(HALF_PI)
 			  	rotateZ(angle)
 				torus(60,20,24,10)
 		      pop()
 			pop()
 			angle +=0.03
+			controls()
 		}
 
 		function controls() {
@@ -447,7 +447,7 @@ import { _controls } from "./libraries/quicksettings"
 				y +=5
 			}
 			if(keyCode == LEFT_ARROW){
-				x -+5
+				x -=5
 			}
 			if(keyCode == RIGHT_ARROW){
 				x +=5
@@ -456,6 +456,231 @@ import { _controls } from "./libraries/quicksettings"
 				z +=5
 			}
 			if(keyCode == 13){
+				z -=5
+			}
+		} */
+
+/* *** Texturing 3D shapes ***
+		Image Texture, Texturing spaceship, Texturing with 2D shape, Texturing with 2D generative art 1, 2, Texturing with text, Texturing with camera */
+
+		// Image Texturing 
+		/*let angle = 0 
+		let pic
+		function preload() {
+			pic = loadImage('Gimon.jpg')
+		}
+
+		function setup() {
+			createCanvas(windowWidth, windowHeight, WEBGL);
+		}
+
+		function draw() {
+			background(255);
+			  texture(pic)
+			  rotateX(angle)
+			  rotateY(angle)
+			  rotateZ(angle)
+			  box(200)
+
+			angle += 0.03
+		} */
+
+		/*// Texturing spaceship
+		let angle = 0 
+		let x = 0
+		let y = 0
+		let z = 0
+		let pic1 = 0 
+
+		function preload() {
+			pic1 = loadImage('Gimon.jpg')
+			pic2 = loadImage('space1.jpg')
+		}
+		function setup() {
+			createCanvas(windowWidth, windowHeight, WEBGL);
+		}
+		function draw() {
+			background(3000);
+			push()
+			  texture(pic1)
+			  noStroke()
+			  rotateZ(-angle/60)
+			  sphere(800)
+			pop()
+			push()
+			  translate(x, y, z)
+			  push()
+			    //fill(000,000,000)
+			    //stroke(175)
+				noStroke()
+				texture(pic1)
+			    rotateY(angle)
+			    ellipsoid(30,100,30,24,16)
+				cone(50,-100,16,1,true)
+				cylinder(40,50,16,1,true,true)
+			  pop()
+			  push()
+			    //fill(0,000,000)
+				//stroke(175)
+				noStroke()
+				texture(pic2)
+			    rotateX(HALF_PI)
+			  	rotateZ(angle)
+				torus(60,20,24,10)
+		      pop()
+			pop()
+			angle +=0.5
+			controls()
+		}
+
+		function controls() {
+			if(keyCode == UP_ARROW){
+				y -=5
+			}
+			if(keyCode == DOWN_ARROW){
+				y +=5
+			}
+			if(keyCode == LEFT_ARROW){
+				x -=5
+			}
+			if(keyCode == RIGHT_ARROW){
+				x +=5
+			}
+			if(keyCode == 32){
 				z +=5
 			}
+			if(keyCode == 13){
+				z -=5
+			}
+		} */
+
+
+		//Textureing with 2D shape
+		/* let angle = 0 
+		let art 
+		function setup() { 
+			createCanvas(windowWidth, windowHeight, WEBGL);
+			art = createGraphics(1000,1000)
 		}
+
+		function draw() {
+			background(255)
+			//2D shape
+			push()
+			  art.fill(80,0,mouseY)
+			  art.strokeWeight(4)
+			  art.stroke(mouseX,mouseY,0)
+			  art.circle(mouseX,mouseY,300)
+			pop()
+
+			//3D shape
+			push()
+			  texture(art)
+			  rotateX(angle)
+			  rotateY(angle)
+			  rotateZ(angle)
+			  box(200)
+			pop()
+
+			angle+=0.03
+		} */
+
+
+		/*/
+		/ Texturing with 2D generative art-1
+		let angle = 0 
+		let art 
+		let r = 10
+		let a = 0
+		let gap = 20 
+		function setup() { 
+			createCanvas(windowWidth, windowHeight, WEBGL);
+			art = createGraphics(400,400)
+		}
+
+		function draw() {
+			background(255)
+			//2D shape
+			push()
+			  // cos(a)= adj(x)/hyp(r)
+			  // x = r * cos(a)
+			  let x = r + gap * cos(a)
+			  // sin(a) = opp(y)/hyp(r)
+			  // y = r * sin(a)
+			  let y = r + gap * sin(a)
+
+			  art.strokeWeight(1)
+			  art.stroke(0)
+			  art.fill(255,0,0)
+			  art.circle(x + 200, y + 200, 10)
+
+			  a += 0.03
+			  gap += 0.05
+			pop()
+
+			//3D shape
+			push()
+			  //noStroke()
+			  texture(art)
+			  rotateX(angle)
+			  rotateY(angle)
+			  rotateZ(angle)
+			  box(250)
+			pop()
+
+			angle+=0.06
+		} */
+
+		
+		/*
+		// Texturing with 2D generative art -2
+		let angle = 0 
+		let art 
+		let r = 10
+		let a = 0
+		let gap = 20 
+		function setup() { 
+			createCanvas(windowWidth, windowHeight, WEBGL);
+			art = createGraphics(400,400)
+		}
+
+		function draw() {
+			background(255)
+			let slide_a = map(mouseX,0,width-600,0.2,0.08)
+
+			two_d(art,slide_a)
+			three_d(art)
+			
+			angle+=0.009
+		}
+		function two_d(art, slide_a){
+		  push()
+			// cos(a)= adj(x)/hyp(r)
+			// x = r * cos(a)
+			let x = r + gap * cos(a)
+			// sin(a) = opp(y)/hyp(r)
+			// y = r * sin(a)
+			let y = r + gap * sin(a)
+
+			art.strokeWeight(1)
+			art.stroke(0)
+			art.fill(255,a,gap)
+			art.circle(x + 200, y + 200, 10)
+
+			a += slide_a
+			gap += 0.03
+		  pop()
+		}
+		function three_d(art){
+		  push()
+			//noStroke()
+			texture(art)
+			rotateX(angle)
+			rotateY(angle)
+			rotateZ(angle)
+			box(250)
+		  pop()
+		} */
+
+		//Texturing with text
+		
