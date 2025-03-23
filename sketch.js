@@ -485,7 +485,8 @@
 			angle += 0.03
 		} */
 
-		/*// Texturing spaceship
+		/*
+		// Texturing spaceship
 		let angle = 0 
 		let x = 0
 		let y = 0
@@ -552,11 +553,12 @@
 			if(keyCode == 13){
 				z -=5
 			}
-		} */
+		} 
+		*/	
 
-
+		/*
 		//Textureing with 2D shape
-		/* let angle = 0 
+		let angle = 0 
 		let art 
 		function setup() { 
 			createCanvas(windowWidth, windowHeight, WEBGL);
@@ -586,8 +588,8 @@
 		} */
 
 
-		/*/
-		/ Texturing with 2D generative art-1
+		/*
+		// Texturing with 2D generative art-1
 		let angle = 0 
 		let art 
 		let r = 10
@@ -682,5 +684,80 @@
 		  pop()
 		} */
 
+
+
 		//Texturing with text
+		/*
+		let angle = 0
+		let art 
+		function setup() {
+			createCanvas(windowWidth, windowHeight, WEBGL);
+			art =createGraphics(1000,1000)
+		}
+
+		function draw() {
+			background(255);
+			threeD(art,angle)
+
+
+			//text
+			//
+			//web save font - Arial, Georgia, Times New Romen, 
+			//Courier New, Verdana and Trebuchet MS
+			
+			twoDtext(art)
+
+			angle += 0.003
+
+		}
+
+		function twoDtext(art) {
+			push()
+				art.stroke(0)
+				art.fill(0)
+				art.textSize(40)
+				art.textFont('Georgia')
+				art.text('Only a life lived for others is a life worthwhile',100, 400)
+				art.text('- Albert Einstein', 100,600)
+			pop()
+		}
+
+		function threeD(art,angle) {
+			push()
+				noStroke()
+				texture(art)
+				rotateY(sin(angle)/2)
+				plane(900,900)
+			pop()
+		} */
 		
+		// Texturing with camera 
+
+		let angle = 0 
+		let cam
+		function setup() {
+			createCanvas(windowWidth, windowHeight, WEBGL);
+			cam = createCapture(VIDEO)
+
+		}
+
+		function draw() {
+			background(255)
+			stroke(175,175,0)
+			strokeWeight(2)
+			texture(cam)
+			drawShape(-100,0,angle)
+			drawShape(125,0,-angle)
+			angle -= 0.005
+		}
+
+		function drawShape(x,y,angle) {
+			push()
+				translate(x,y)
+				rotateX(angle)
+				sphere(150,6,3)
+			pop()
+		}
+
+
+	
